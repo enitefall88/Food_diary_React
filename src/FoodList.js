@@ -10,11 +10,12 @@ export default function FoodList({items}) {
   </div>
 }
 
-function FoodItem({item, timestamp, energyValue}) {
+function FoodItem({item}) {
+  let d = new Date(item.timeStamp)
   return  <div className="d-flex justify-content-between mt-3">
     <div>
-      <small className="text-muted">{item.timestamp}</small><br/>
-      {item.mealName} {item.energyValue}
+      <small className="text-muted">{d.toLocaleDateString('de-DE')} {d.toLocaleTimeString('de-DE')}</small><br/>
+      {item.mealName} {item.energyValue} kcal
     </div>
     <div>
       <button type="button"
