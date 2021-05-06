@@ -1,20 +1,20 @@
 import React from "react"
 
-export default function FoodList() {
+export default function FoodList({items}) {
   return <div style={{maxWidth: "20rem"}}>
         <div>
-      {[true,true,true].map(item =>
-        <FoodItem/>
+      {items.map(item =>
+        <FoodItem item={item}/>
       )}
     </div>
   </div>
 }
 
-function FoodItem() {
+function FoodItem({item, timestamp, energyValue}) {
   return  <div className="d-flex justify-content-between mt-3">
     <div>
-      <small className="text-muted">Date</small><br/>
-     Breakfast     kcal
+      <small className="text-muted">{item.timestamp}</small><br/>
+      {item.mealName} {item.energyValue}
     </div>
     <div>
       <button type="button"
