@@ -1,14 +1,19 @@
-import React from "react"
+import React, {useState} from "react"
 import SearchForm from "./SearchForm";
 
 export default function FoodList({items, deleteItem}) {
+  let[search, setSearch] = useState("")
+  let filteredItems = items.filter(item => {
+   return item.mealName.match(new RegExp("^" + search, "i"))
+  })
+
   return <div style={{maxWidth: "20rem"}}>
 
-        <SearchForm/>
+        <SearchForm search={search} setSearch={setSearch} />
 
          <div>
-        {items.map(item =>
-        <FoodItem item={item} key={item.timeStamp} deleteItem={deleteItem}/>
+        {filteredItems.map(item =>
+        <FoodItem item={item} key={item.id} deleteItem={deleteItem}/>
       )}
     </div>
   </div>
@@ -24,7 +29,7 @@ function FoodItem({item, deleteItem}) {
     <div>
       <button type="button"
               className="btn btn-secondary ml-2"
-              onClick={e => deleteItem(item.timeStamp)}
+              onClick={_ => {deleteItem(item.id)}}
               style={{lineHeight: 1, padding: "0.125rem .25rem"}}>
         &times;
       </button>

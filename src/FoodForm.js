@@ -1,15 +1,20 @@
 import React, {useState} from "react"
+import { nanoid } from 'nanoid'
 
 export default function FoodForm({createItem}) {
   let [mealName, setMealName] = useState("Breakfast")
   let [timeStamp, setTimeStamp] = useState(new Date())
   let [energyValue, setEnergyValue] = useState(0)
+  let [id, setId] = useState(setRandomId())
 
 
   return <div className="form-inline">
    <select autoComplete="off"
               className="form-control"
-              onChange={e=> setMealName(e.target.value)}
+              onChange={e=> {setMealName(
+                  e.target.value); setId(setRandomId())
+                }
+              }
               name="text"
               placeholder=""
               value={mealName}>
@@ -25,7 +30,9 @@ export default function FoodForm({createItem}) {
            className="form-control ml-2"/>
       <button type="button"
             disabled={false}
-            onClick={_ => createItem({mealName, timeStamp, energyValue})}
+            onClick={_ => createItem(
+                {mealName, timeStamp, energyValue, id}
+            )}
             className="btn btn-primary ml-2">
       Add
     </button>
@@ -36,6 +43,7 @@ function formatDate(date) {
   return `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`
 }
 
+function setRandomId() {return nanoid()}
 
 
 

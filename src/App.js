@@ -1,28 +1,30 @@
 import React, {useState} from "react"
 import FoodForm from "./FoodForm"
 import FoodList from "./FoodList"
-import SearchForm from "./SearchForm";
+import { nanoid } from 'nanoid'
 
 let initialMealEntries = [
-  {mealName: "Breakfast", timeStamp: "01.02.2020 11:00:00", energyValue: 0},
-  {mealName: "Lunch", timeStamp: "01.02.2020 12:00:00", energyValue: 0},
-  {mealName: "Dinner", timeStamp: "01.02.2020 13:00:00", energyValue: 0},
-]
+  {mealName: "Breakfast", timeStamp: "01.02.2020 11:00:00", energyValue: 0, id: nanoid()},
+  {mealName: "Lunch", timeStamp: "01.02.2020 12:00:00", energyValue: 0, id: nanoid()},
+  {mealName: "Dinner", timeStamp: "01.02.2020 13:00:00", energyValue: 0, id: nanoid()}
+  ]
 
 function App() {
 let [items, setItems] = useState(initialMealEntries)
 
-function createItem({mealName, timeStamp, energyValue}) {
-  let item = {mealName, timeStamp, energyValue}
+function createItem({mealName, timeStamp, energyValue, id}) {
+  let item = {mealName, timeStamp, energyValue, id}
   setItems(
       [...items, item]
       )
 }
 
-function deleteItem(timeStamp) {
+function deleteItem(id) {
   setItems(
-      items.filter(item => item.timeStamp != timeStamp)
+      items.filter(item => {return item.id != id})
+
   )
+  console.log("!!")
 }
 
 
