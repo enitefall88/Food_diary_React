@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 
 export default function FoodForm({createItem}) {
-  let [mealName, setMealName] = useState("")
+  let [mealName, setMealName] = useState("Breakfast")
   let [timeStamp, setTimeStamp] = useState(new Date())
   let [energyValue, setEnergyValue] = useState(0)
 
