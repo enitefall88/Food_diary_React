@@ -5,7 +5,7 @@ export default function FoodForm({createItem}) {
   let [mealName, setMealName] = useState("Breakfast")
   let [timeStamp, setTimeStamp] = useState(new Date())
   let [energyValue, setEnergyValue] = useState(0)
-  let [id, setId] = useState(setRandomId())
+  let [id, setId] = useState(getRandomId())
 
 
   return <div className="form-inline">
@@ -25,7 +25,7 @@ export default function FoodForm({createItem}) {
       <input type="date" value={formatDate(timeStamp)}
              className="form-control ml-2"
              onChange={e => (setTimeStamp(new Date(e.target.value)))}/>
-      <input type="number" min={100} max={2000} step={100} value={energyValue}
+      <input type="number" min={100} max={3000} step={100} value={energyValue}
            onChange={e => setEnergyValue(parseInt(e.target.value))}
            className="form-control ml-2"/>
       <button type="button"
@@ -33,7 +33,7 @@ export default function FoodForm({createItem}) {
             onClick={_ => {createItem(
                 {mealName, timeStamp, energyValue, id}
             ); setId(
-                setRandomId())
+                getRandomId())
             }}
             className="btn btn-primary ml-2">
       Add
@@ -45,7 +45,7 @@ function formatDate(date) {
   return `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(-2)}`
 }
 
-function setRandomId() {
+function getRandomId() {
   return nanoid()
 }
 
